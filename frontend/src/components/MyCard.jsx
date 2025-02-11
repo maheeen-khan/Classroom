@@ -1,15 +1,18 @@
 import React from 'react';
 import { Card } from 'antd';
 
-const MyCard = () => (
+const MyCard = (props) => (
   <Card
-    title="Card title"
-    variant="borderless"
+    title={props.name}
+    variant="border"
     style={{
       width: 300,
     }}
   >
-    <p>Card content</p>
+
+    <p>${props.rollno}</p>
+    <p>${props.desc}</p>
+
 
   </Card>
 );
