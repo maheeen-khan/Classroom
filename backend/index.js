@@ -37,7 +37,7 @@ const stdData = [
     }
 ]
 
-app.get('/', (req, res) => {
+app.get('/api/students', (req, res) => {
     res.send(stdData)
     })
 
