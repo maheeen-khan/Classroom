@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import MyCard from './components/MyCard'
 import axios from 'axios'
+import MyLayout from './components/Navbar'
 
 function App() {
 
@@ -20,12 +21,13 @@ function App() {
   },[])
   return (
     <>
-    
+    <MyLayout>
+    <div className="cont">
       {student.map((value,index)=>(
         <MyCard key={index} name={value.name} rollno={value.rollNo} desc={value.description} />
       ))}
-      
-
+    </div>  
+    </MyLayout>
     </>
   )
 }

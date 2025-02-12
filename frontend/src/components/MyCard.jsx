@@ -4,14 +4,16 @@ import { Card } from 'antd';
 const MyCard = (props) => (
   <Card
     title={props.name}
+    className='card'
     variant="border"
     style={{
       width: 300,
+      textAlign: 'center',
     }}
   >
 
-    <p>${props.rollno}</p>
-    <p>${props.desc}</p>
+    <p>Roll no: <span className='bold'>{props.rollno}</span></p>
+    <p>{props.desc}</p>
 
 
   </Card>
