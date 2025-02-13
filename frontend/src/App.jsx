@@ -6,28 +6,40 @@ import MyLayout from './components/Navbar'
 
 function App() {
 
-  const [student , setStudent] = useState([])
+  const [student, setStudent] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
 
     async function fetchData() {
-   
+
       const myData = await axios.get('http://localhost:3000/api/students')
       console.log(myData.data);
       setStudent(myData.data)
     }
     fetchData();
-    
-  },[])
+
+  }, [])
   return (
     <>
-    <MyLayout>
-    <div className="cont">
-      {student.map((value,index)=>(
-        <MyCard key={index} name={value.name} rollno={value.rollNo} desc={value.description} />
-      ))}
-    </div>  
-    </MyLayout>
+      <MyLayout>
+        <div className="cont">
+          {student.length === 0 && <div class="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>}
+          {student.map((value, index) => (
+            <MyCard key={index} name={value.name} rollno={value.rollNo} desc={value.description} />
+          ))}
+        </div>
+      </MyLayout>
     </>
   )
 }
