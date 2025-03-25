@@ -1,12 +1,14 @@
 import React from 'react';
 import { Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
+import { Link } from 'react-router-dom';
+
 const items = [
-    { key: 1, label: 'Home'},
-    { key: 2, label: 'All student'},
-    { key: 3, label: 'Attendence'},
-    { key: 4, label: 'Contact'}
-]
+  { key: "1", label: <Link to="/add-student">Add Student</Link> },
+  { key: "2", label: <Link to="/">All Students</Link> },
+  { key: "3", label: <Link to="/attendance">Attendance</Link> }
+];
+
 const MyLayout = ({children}) => {
   const {
     token: { colorBgContainer, borderRadiusLG },

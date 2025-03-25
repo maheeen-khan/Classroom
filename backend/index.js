@@ -5,39 +5,45 @@ const app = express()
 const port = process.env.PORT || 4000
 
 // Enable CORS for frontend (http://localhost:5173)
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors());
 
 
 const stdData = [
     {
         name: "Maheen",
         rollNo: 26,
-        description: "She is doing software engineering from University of Karachi."
+        email: "maheenkhan6@gmail.com",
+        Class:"8"
     },
     {
         name: "Ashna",
         rollNo: 28,
-        description: "She is very intelligent girl in Class 10th."
+        email: "ashna67@gmail.com",
+        Class:"7"
     },
     {
         name: "Sarah",
         rollNo: 27,
-        description: "Passionate about science and loves experiments."
+        email: "sarahh86@gmail.com",
+        Class:"9"
     },
     {
         name: "Olivia",
         rollNo: 29,
-        description: "A bookworm who loves literature and poetry."
+        email: "oliviaa45@gmail.com",
+        Class:"10"
     },
     {
         name: "Daniel",
         rollNo: 31,
-        description: "Enjoys coding and participates in hackathons."
+        email: "danielb34@gmail.com",
+        Class:"6"
     },
     {
         name: "John",
         rollNo: 33,
-        description: "A diligent student who excels in mathematics."
+        email: "johnn66@gmail.com",
+        Class:"6"
     }
 ]
 
