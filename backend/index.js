@@ -8,7 +8,6 @@ connectToDB()
 const app = express()
 const port = process.env.PORT || 4000
 
-// Enable CORS for frontend (http://localhost:5173)
 app.use(cors());
 
 
