@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import 'dotenv/config';
+import connectToDB from "../db/dbStudent.mjs";
+
 const studentSchema = new mongoose.Schema({
 
     name:{

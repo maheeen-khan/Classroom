@@ -1,7 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
-import connectToDB from './db/db.mjs'
+import connectToDB from './db/dbStudent.mjs'
+import Student from './models/student.model.mjs'
 
 connectToDB()
 
@@ -9,7 +10,7 @@ const app = express()
 const port = process.env.PORT || 4000
 
 app.use(cors());
-
+app.use(express.json());
 
 const stdData = [
     {
@@ -50,9 +51,23 @@ const stdData = [
     }
 ]
 
-app.get('/api/students', (req, res) => {
-    res.send(stdData)
-    })
+app.get('/api/students', async (req, res) => {
+    try{
+        const students = await Student.find()
+        res.send(students)
+    } catch (error) {
+        res.status(400).send({error: err, status: 400 })
+    }
+})
+
+
+app.post('/api/add-student', async (req, res) => {
+    const data = await req.body
+    const student = await Student.create(data)
+    res.send(student)
+    console.log(student)
+})
+
 
 
 app.listen(port, () => {
