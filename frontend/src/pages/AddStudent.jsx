@@ -1,8 +1,8 @@
 import React from 'react'
-
+import BasicForm from '../components/Form'
 const AddStudent = () => {
   return (
-    <div>AddStudent</div>
+    <BasicForm/>
   )
 }
 

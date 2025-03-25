@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const items = [
   { key: "1", label: <Link to="/add-student">Add Student</Link> },
@@ -10,6 +10,15 @@ const items = [
 ];
 
 const MyLayout = ({children}) => {
+  const location = useLocation(); // Get the current path
+
+  // Map pathname to Menu keys
+  const getSelectedKeys = () => {
+    if (location.pathname === "/add-student") return ["1"];
+    if (location.pathname === "/") return ["2"];
+    if (location.pathname === "/attendance") return ["3"];
+    return [];
+  };
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -28,6 +37,7 @@ const MyLayout = ({children}) => {
           mode="horizontal"
           className='menu'
           defaultSelectedKeys={['2']}
+          selectedKeys={getSelectedKeys()} // Dynamically update selected key
           items={items}
           style={{
             flex: 1,
