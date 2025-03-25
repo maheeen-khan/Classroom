@@ -5,7 +5,7 @@ import Attendence from '../pages/Attendance.jsx'
 import UpdateStudent from '../pages/UpdateStudent.jsx'
 import AllStudents from '../pages/AllStudents.jsx'
 import Navbar from '../components/Navbar.jsx'
-
+import ReadStudent from '../pages/ReadStudent.jsx'
 const AppRoute = () => {
   return (
 
@@ -14,6 +14,8 @@ const AppRoute = () => {
         <Route path="/add-student" element={<Navbar><AddStudent /></Navbar>} />
         <Route path="/attendance" element={<Navbar><Attendence /></Navbar>} />
         <Route path="/update" element={<Navbar><UpdateStudent /></Navbar>} />
+        <Route path="/view-student" element={<Navbar><ReadStudent/></Navbar>}></Route>
+        <Route path="/delete" element={<Navbar><ReadStudent/></Navbar>}></Route>
       </Routes>
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, UserDeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 
 const MyCard = (props) => (
@@ -12,7 +12,7 @@ const MyCard = (props) => (
       width: 300,
     }}
     // p={2}
-    extra={<Link to={'/update'}><EyeOutlined /> </Link> }
+    extra={[<Link to={'/view-student'}><EyeOutlined /> </Link>, <Link to={'/update'}><EditOutlined /></Link>, <Link to={'/delete'}><UserDeleteOutlined /></Link>]}
   >
 
     <p>Roll no: <span className='bold'>{props.rollno}</span></p>
