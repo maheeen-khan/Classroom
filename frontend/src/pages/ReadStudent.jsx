@@ -1,8 +1,13 @@
 import React from 'react'
+import ViewCard from '../components/ViewCard'
 
 const ReadStudent = () => {
   return (
-    <div>View Student</div>
+    <>
+    
+    <ViewCard/>
+    
+    </>
   )
 }
 
