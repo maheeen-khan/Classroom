@@ -56,19 +56,39 @@ app.get('/api/students', async (req, res) => {
         const students = await Student.find()
         res.send(students)
     } catch (error) {
-        res.status(400).send({error: err, status: 400 })
+        res.status(400).send({error: error, status: 400 })
+    }
+})
+
+app.get('/api/students/:id', async (req, res) => {
+    try{
+        const student = await Student.findById(req.params.id)
+        res.send(student)
+    }catch (error) {
+        res.status(400).send({error: error, status: 400 })
     }
 })
 
 
-app.post('/api/add-student', async (req, res) => {
+app.post('/api/addStudent', async (req, res) => {
     const data = await req.body
     const student = await Student.create(data)
     res.send(student)
     console.log(student)
 })
 
+app.patch('/api/updateStudent/:id', async (req, res) => {
+    const updateData = await req.body
+    const updateStudent = await Student.findByIdAndUpdate(req.params.id, updateData, {new: true})
+    res.send(updateStudent)
+    console.log("Student updated ", updateStudent)
+})
 
+app.delete('/api/deleteStudent/:id', async (req, res) => {
+    const student = await Student.findByIdAndDelete(req.params.id)
+    res.send(student)
+    console.log("Student deleted ", student)
+})
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
