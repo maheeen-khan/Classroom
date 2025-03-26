@@ -7,7 +7,7 @@ import {
   InputNumber,
 } from 'antd';
 import axios from 'axios'
-import { toast } from "react-toastify";
+import { toast , ToastContainer} from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 
 const { RangePicker } = DatePicker;
@@ -47,7 +47,7 @@ const BasicForm = () => {
       setTimeout(() => {
         setLoading(false);
         form.resetFields();
-        toast.success("Student added successfully! 🎉");
+        toast.success("Student added successfully!");
         navigate("/");
       }, 1000);
 
@@ -61,6 +61,7 @@ const BasicForm = () => {
 
   return (
     <>
+
       <Form
         {...formItemLayout}
         form={form}

@@ -34,13 +34,16 @@ const BasicForm = () => {
         setLoading(true);
 
         const updateStudent = async (values) => {
-            try{
+            try {
                 const updateData = await axios.patch(`http://localhost:3000/api/updateStudent/${id}`, values);
-    
-                console.log("Updated Data:", updateData);
-                setLoading(false);
-                navigate('/');
-            }catch(err){
+
+                toast.success("Student has been updated");
+                setTimeout(() => {
+                    setLoading(false);
+                    navigate('/');
+                }, 1000);
+
+            } catch (err) {
                 console.log("Error:", err);
             }
         }
@@ -123,7 +126,7 @@ const BasicForm = () => {
 
                 <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                     <Button type="primary" htmlType="submit">
-                        {loading ? 'Adding...' : 'Add Student'}
+                        {loading ? 'Updating...' : 'Update Student'}
                     </Button>
                 </Form.Item>
             </Form>

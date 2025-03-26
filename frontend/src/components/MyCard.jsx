@@ -3,6 +3,7 @@ import { Card } from 'antd';
 import { EyeOutlined, EditOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const MyCard = (props) => {
 
@@ -10,14 +11,15 @@ const MyCard = (props) => {
     const deleteStudent = async () => {
       const res = await axios.delete(`http://localhost:3000/api/deleteStudent/${id}`);
       console.log("Deleted Student : ", res.data);
-
+      toast.error("Student Deleted Successfully!");
     }
+    deleteStudent();
     setTimeout(() => {
 
-      deleteStudent();
+ 
       window.location.reload();
       
-    }, 2000);
+    }, 4000);
 
   }
 
