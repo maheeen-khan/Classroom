@@ -46,7 +46,7 @@ const BasicForm = () => {
         form.resetFields();
         toast.success("Student added successfully! 🎉");
         navigate("/");
-      }, 2000);
+      }, 1000);
 
     } catch (error) {
 
