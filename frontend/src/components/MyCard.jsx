@@ -14,15 +14,15 @@ const MyCard = (props) => (
       boxShadow:'none'
     }}
     // p={2}
-    extra={[<Link to={'/view-student'} style={{ marginRight: '10px', color:'#27667B' }}><EyeOutlined /> </Link>,
+    extra={[<Link to={`/view-student/${props.id}`} style={{ marginRight: '10px', color:'#27667B' }}><EyeOutlined /> </Link>,
        <Link to={'/update'} style={{ marginRight: '10px', color:'#27667B' }}><EditOutlined /></Link>, 
        <Link to={'/delete'} style={{color:'#27667B'}}><MinusCircleOutlined /></Link>]}
   >
 
     <p>Roll no: <span className='bold'>{props.rollno}</span></p>
     <p>Class: {props.grade}</p>
-    <p>Email: {props.mail}</p>
-
+    {/* <p>Email: {props.mail}</p> */}
+    {/* <p>{props._id}</p> */}
 
   </Card>
 );

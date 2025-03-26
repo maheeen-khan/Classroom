@@ -33,7 +33,7 @@ const AllStudents = () => {
         <div></div>
       </div>}
       {student.map((value, index) => (
-        <MyCard key={index} name={value.name} rollno={value.rollNo} desc={value.description} grade={value.Class} mail={value.email} />
+        <MyCard key={index} name={value.name} rollno={value.rollNo} desc={value.description} grade={value.Class} mail={value.email} id={value._id} />
       ))}
     </div>
   </MyLayout>

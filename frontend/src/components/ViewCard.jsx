@@ -1,11 +1,36 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Card } from 'antd';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+const ViewCard = () => {
 
-const ViewCard = () => (
-  <Card title="Card title" variant="borderless" style={{ width: 300 }}>
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
+  const [stdData, setstdData] = useState('');
+
+  const {id} = useParams();
+  const getStudent = async () => {
+    try {
+      const studentData = await axios.get(`http://localhost:3000/api/students/${id}`);
+      setstdData(studentData.data);
+    } catch (error) {
+      console.log("Error in getting student data!", error);
+    }
+    
+  }
+  useEffect(() => {
+
+    getStudent();
+    
+  }, [])
+  
+
+  return(
+  <Card title={stdData.name} variant="borderless" style={{ width: 300 }}>
+    
+    <p>Class : {stdData.Class ? stdData.Class : 'N/A'}</p>
+    <p>Roll no: {stdData.rollNo ? stdData.rollNo : 'N/A'}</p>
+    <p>Email: {stdData.email ? stdData.email : 'N/A'}</p>
+    <p>Address : {stdData.Address ? stdData.Address : 'N/A'} </p>
   </Card>
-);
+  )
+};
 export default ViewCard;
