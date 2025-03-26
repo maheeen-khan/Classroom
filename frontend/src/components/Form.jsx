@@ -23,11 +23,13 @@ const formItemLayout = {
 };
 
 const BasicForm = () => {
+
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
+
     setLoading(true);
     console.log("Submitted Values:", values);
 
@@ -39,6 +41,7 @@ const BasicForm = () => {
         },
         body: JSON.stringify(values),
       });
+      
       const data = await uploadData.json();
 
       setTimeout(() => {

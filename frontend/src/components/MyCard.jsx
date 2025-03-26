@@ -34,7 +34,7 @@ const MyCard = (props) => {
       }}
       // p={2}
       extra={[<Link to={`/view-student/${props.id}`} style={{ marginRight: '10px', color: '#27667B' }}><EyeOutlined /> </Link>,
-      <Link to={'/update'} style={{ marginRight: '10px', color: '#27667B' }}><EditOutlined /></Link>,
+      <Link to={`/update/${props.id}`} style={{ marginRight: '10px', color: '#27667B' }}><EditOutlined /></Link>,
       <Link onClick={() => deleting(props.id)} style={{ color: '#27667B' }}><MinusCircleOutlined /></Link>]}
     >
 

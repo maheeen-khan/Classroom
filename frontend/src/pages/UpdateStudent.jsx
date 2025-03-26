@@ -1,8 +1,8 @@
 import React from 'react'
-import BasicForm from '../components/Form'
+import UpdateForm from '../components/UpdateForm'
 const UpdateStudent = () => {
   return (
-    <BasicForm/>
+    <UpdateForm />
 
   )
 }

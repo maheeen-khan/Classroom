@@ -13,7 +13,7 @@ const AppRoute = () => {
         <Route path="/" element={<AllStudents />} />
         <Route path="/add-student" element={<Navbar><AddStudent /></Navbar>} />
         <Route path="/attendance" element={<Navbar><Attendence /></Navbar>} />
-        <Route path="/update" element={<Navbar><UpdateStudent /></Navbar>} />
+        <Route path="/update/:id" element={<Navbar><UpdateStudent /></Navbar>} />
         <Route path="/view-student/:id" element={<Navbar><ReadStudent/></Navbar>}></Route>
         <Route path="/delete"></Route>
       </Routes>
