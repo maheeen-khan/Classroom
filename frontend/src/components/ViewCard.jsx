@@ -24,12 +24,14 @@ const ViewCard = () => {
   
 
   return(
-  <Card title={stdData.name} variant="borderless" style={{ width: 300 }}>
+  <Card title={stdData.name} variant="borderless" style={{  backgroundColor: '#eaf2c3', textAlign:'center'}}>
+    
     
     <p>Class : {stdData.Class ? stdData.Class : 'N/A'}</p>
     <p>Roll no: {stdData.rollNo ? stdData.rollNo : 'N/A'}</p>
     <p>Email: {stdData.email ? stdData.email : 'N/A'}</p>
     <p>Address : {stdData.Address ? stdData.Address : 'N/A'} </p>
+    <p>Enrolled at : {stdData.createdAt}</p>
   </Card>
   )
 };

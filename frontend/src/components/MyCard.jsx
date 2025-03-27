@@ -39,11 +39,11 @@ const MyCard = (props) => {
       <Link to={`/update/${props.id}`} style={{ marginRight: '10px', color: '#27667B' }}><EditOutlined /></Link>,
       <Link onClick={() => deleting(props.id)} style={{ color: '#27667B' }}><MinusCircleOutlined /></Link>]}
     >
-
+      <p className='update'>{props.updated == props.created ? "" : "Updated"}</p>
       <p>Roll no: <span className='bold'>{props.rollno}</span></p>
       <p>Class: {props.grade}</p>
-      {/* <p>Email: {props.mail}</p> */}
-      {/* <p>{props._id}</p> */}
+      
+
 
     </Card>
   )

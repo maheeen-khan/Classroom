@@ -9,6 +9,7 @@ import {
 import axios from 'axios'
 import { toast , ToastContainer} from "react-toastify";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const { RangePicker } = DatePicker;
 const formItemLayout = {
@@ -48,7 +49,25 @@ const BasicForm = () => {
         setLoading(false);
         form.resetFields();
         toast.success("Student added successfully!");
-        navigate("/");
+        
+        Swal.fire({
+          title: "Do you want to add more students?",
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+          denyButtonText: `Not yet`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            // Swal.fire("Saved!", "", "success");
+            navigate('/add-student')
+          } else if (result.isDenied) {
+            // Swal.fire("Changes are not saved", "", "info");
+            navigate('/')
+          }
+        });
+
+
       }, 1000);
 
     } catch (error) {
