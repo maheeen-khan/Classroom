@@ -97,7 +97,10 @@ const BasicForm = () => {
         <Form.Item
           label="Class"
           name="Class"
-          rules={[{ required: true, message: 'Please input class' }]}
+          rules={[
+            { required: true, message: 'Please input class' },
+            { type: "number", min: 6, max: 10, message: "Class must be number & between 6 and 10" },
+          ]}
         >
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
@@ -105,7 +108,10 @@ const BasicForm = () => {
         <Form.Item
           label="Roll no"
           name="rollNo"
-          rules={[{ required: true, message: 'Please input roll no' }]}
+          rules={[
+            { required: true, message: 'Please input roll no' },
+            { type: "number", min: 1, max: 30, message: "Roll no must be number & between 1 and 30" },
+          ]}
         >
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
@@ -113,7 +119,13 @@ const BasicForm = () => {
         <Form.Item
           label="Email"
           name="email"
-          rules={[{ required: true, message: 'Please input email' }]}
+          rules={[
+            { required: true, message: 'Please input email' },
+            { 
+              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, 
+              message: "Please enter a valid email address!" 
+            }
+          ]}
         >
           <Input style={{ width: '100%' }} />
         </Form.Item>

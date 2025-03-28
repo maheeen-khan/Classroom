@@ -7,7 +7,7 @@ import { Table, Space, Tag, Button } from 'antd';
 import { EyeOutlined, EditOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
-
+import Swal from 'sweetalert2';
 const AllStudents = () => {
 
   const [student, setStudent] = useState([])
@@ -17,18 +17,42 @@ const AllStudents = () => {
 
 
   const deleting = (id) => {
+
+    
     const deleteStudent = async () => {
       const res = await axios.delete(`http://localhost:3000/api/deleteStudent/${id}`);
       console.log("Deleted Student : ", res.data);
       toast.error("Student Deleted Successfully!");
     }
-    deleteStudent();
-    setTimeout(() => {
 
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-      window.location.reload();
+        deleteStudent();
+        Swal.fire({
+          title: "Deleted!",
+          text: "Student data has been deleted.",
+          icon: "success"
+        });
+        setTimeout(() => {
+    
+    
+          window.location.reload();
+    
+        }, 4000);
 
-    }, 4000);
+        
+      }
+    });
+
 
   }
 

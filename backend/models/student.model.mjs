@@ -11,15 +11,22 @@ const studentSchema = new mongoose.Schema({
     rollNo:{
         type: Number,
         required: true,
+        minimum: 1,
+        maximum: 30,
+        description: "Roll no must be in between 1 to 30"
     },
     email:{
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
     },
     Class:{
         type: String,
-        required: true
+        required: true,
+        minimum: 6,
+        maximum: 10,
+        description: "Class must be in between 6 to 10"
     },
     Address:{
         type: String,
