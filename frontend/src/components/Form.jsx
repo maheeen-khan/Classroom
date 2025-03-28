@@ -53,7 +53,6 @@ const BasicForm = () => {
         Swal.fire({
           title: "Do you want to add more students?",
           showDenyButton: true,
-          showCancelButton: true,
           confirmButtonText: "Yes",
           denyButtonText: `Not yet`,
         }).then((result) => {

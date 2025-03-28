@@ -68,9 +68,10 @@ const MyLayout = ({children}) => {
       <Footer
         style={{
           textAlign: 'center',
+          color: 'grey'
         }}
       >
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+        Classroom <span style={{color:'red'}}>©{new Date().getFullYear()}</span> Created by Maheen Khan
       </Footer>
     </Layout>
   );
