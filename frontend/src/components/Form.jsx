@@ -80,6 +80,7 @@ const BasicForm = () => {
   return (
     <>
 
+  <div className="cent">
       <Form
         {...formItemLayout}
         form={form}
@@ -125,20 +126,13 @@ const BasicForm = () => {
           <Input style={{ width: '100%' }} />
         </Form.Item>
 
-        {/* <Form.Item
-          label="Session"
-          name="session"
-          rules={[{ required: true, message: 'Please input' }]}
-        >
-          <RangePicker />
-        </Form.Item> */}
-
         <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
           <Button type="primary" htmlType="submit">
             {loading ? 'Adding...' : 'Add Student'}
           </Button>
         </Form.Item>
       </Form>
+      </div>
     </>
   );
 };

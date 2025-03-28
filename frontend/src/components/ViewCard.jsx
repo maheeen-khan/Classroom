@@ -44,7 +44,7 @@ const ViewCard = () => {
     
     :
 
-      <Card title={stdData.name} variant="borderless" style={{ backgroundColor: '#eaf2c3'}} headStyle={{ color: '#261FB3', borderBottom: '1px solid rgb(165, 165, 165)', textAlign: 'center' }}>
+      <Card title={stdData.name} variant="borderless" style={{ backgroundColor: '#eaf2c3'}} headStyle={{ color: '#161179', borderBottom: '1px solid rgb(165, 165, 165)', textAlign: 'center', fontSize:'22px', fontFamily:"Georgia" }}>
 
       <p className='update'>{stdData.updatedAt == stdData.createdAt ? "" : <Tag color="geekblue">
         UPDATED

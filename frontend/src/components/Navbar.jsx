@@ -28,7 +28,7 @@ const MyLayout = ({children}) => {
         style={{
           display: 'flex',
           alignItems: 'center',
-          backgroundColor: '#143D60',
+          backgroundColor: '#161179',
         }}
       >
         <div className="demo-logo" />
@@ -43,7 +43,7 @@ const MyLayout = ({children}) => {
           style={{
             flex: 1,
             minWidth: 0,
-            backgroundColor: '#143D60',
+            backgroundColor: '#161179',
           }}
         />
       </Header>

@@ -7,14 +7,13 @@ import { Table, Space, Tag, Button } from 'antd';
 import { EyeOutlined, EditOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
 const AllStudents = () => {
 
   const [student, setStudent] = useState([])
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [showBackButton, setShowBackButton] = useState(false);
-  const navigate = useNavigate();
+ 
 
 
   const deleting = (id) => {
@@ -35,24 +34,23 @@ const AllStudents = () => {
 
   const columns = [
     {
-      title: 'Name',
+      title: <span style={{ color: '#161179' }}>Name</span>,
       dataIndex: 'name',
       showSorterTooltip: { target: 'full-header' },
-
+      style: {color: '#161179'},
       sorter: (a, b) => a.name.length - b.name.length,
       sortDirections: ['descend'],
     },
     {
-      title: 'Roll No',
+      title: <span style={{ color: '#161179' }}>Roll No</span>,
       dataIndex: 'rollNo',
-      // defaultSortOrder: 'descend',
-      // sorter: (a, b) => a.rollNo - b.rollNo,
     },
     {
-      title: 'Class',
+      title: <span style={{ color: '#161179' }}>Class</span>, 
       dataIndex: 'Class',
       defaultSortOrder: 'descend',
       sorter: (a, b) => a.Class - b.Class,
+
       filters: [
 
         {
@@ -80,12 +78,12 @@ const AllStudents = () => {
 
     },
     {
-      title: 'Address',
+      title: <span style={{ color: '#161179' }}>Address</span>,
       dataIndex: 'Address',
      
     },
     {
-      title: 'Action',
+      title:  <span style={{ color: '#161179' }}>Action</span>,
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
