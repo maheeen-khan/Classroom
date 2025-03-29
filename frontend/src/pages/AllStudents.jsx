@@ -3,7 +3,7 @@ import '../App.css'
 import MyCard from '../components/MyCard'
 import axios from 'axios'
 import MyLayout from '../components/Navbar'
-import { Table, Space, Tag, Button } from 'antd';
+import { Table, Space, Tag, Button, Pagination } from 'antd';
 import { EyeOutlined, EditOutlined, MinusCircleOutlined, UserOutlined, NumberOutlined, GroupOutlined, InteractionOutlined, EnvironmentOutlined} from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -178,8 +178,12 @@ const AllStudents = () => {
               dataSource={student}
               onChange={onChange}
               showSorterTooltip={{ target: 'sorter-icon' }}
-              pagination={false}
-
+              // pagination={false}
+              pagination={{
+                pageSize: 5,  // Show only 5 rows per page
+                showSizeChanger: false, // Hide page size changer
+                position: ['bottomCenter'], // Positions pagination at the bottom center
+              }}
             />
 
             {showBackButton && (
@@ -188,7 +192,10 @@ const AllStudents = () => {
                   Back
                 </Button></div>
             )}
-          </>}
+           
+          </>
+
+          }
 
 
 
