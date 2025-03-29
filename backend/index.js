@@ -69,6 +69,21 @@ app.get('/api/students/:id', async (req, res) => {
     }
 })
 
+// Find student by name 
+app.get('/api/students/name/:name', async (req, res) => {
+    try {
+        const students = await Student.find({ name: { $regex: new RegExp(req.params.name, 'i') } }).lean();
+
+        if (students.length === 0) {
+            return res.status(404).json({ message: 'No students found' });
+        }
+
+        res.status(200).json(students);
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error', error });
+    }
+});
 
 app.post('/api/addStudent', async (req, res) => {
     const data = await req.body

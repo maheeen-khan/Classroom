@@ -4,7 +4,7 @@ import MyCard from '../components/MyCard'
 import axios from 'axios'
 import MyLayout from '../components/Navbar'
 import { Table, Space, Tag, Button } from 'antd';
-import { EyeOutlined, EditOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, MinusCircleOutlined, UserOutlined, NumberOutlined, GroupOutlined, InteractionOutlined, EnvironmentOutlined} from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
@@ -58,7 +58,7 @@ const AllStudents = () => {
 
   const columns = [
     {
-      title: <span style={{ color: '#161179' }}>Name</span>,
+      title: <span style={{ color: '#161179' }}><UserOutlined /> Student Name</span>,
       dataIndex: 'name',
       showSorterTooltip: { target: 'full-header' },
       style: {color: '#161179'},
@@ -66,11 +66,11 @@ const AllStudents = () => {
       sortDirections: ['descend'],
     },
     {
-      title: <span style={{ color: '#161179' }}>Roll No</span>,
+      title: <span style={{ color: '#161179' }}><NumberOutlined /> Roll No</span>,
       dataIndex: 'rollNo',
     },
     {
-      title: <span style={{ color: '#161179' }}>Class</span>, 
+      title: <span style={{ color: '#161179' }}><GroupOutlined /> Class</span>, 
       dataIndex: 'Class',
       defaultSortOrder: 'descend',
       sorter: (a, b) => a.Class - b.Class,
@@ -102,12 +102,12 @@ const AllStudents = () => {
 
     },
     {
-      title: <span style={{ color: '#161179' }}>Address</span>,
+      title: <span style={{ color: '#161179' }}><EnvironmentOutlined /> Address</span>,
       dataIndex: 'Address',
      
     },
     {
-      title:  <span style={{ color: '#161179' }}>Action</span>,
+      title:  <span style={{ color: '#161179' }}><InteractionOutlined /> Action</span>,
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
@@ -132,7 +132,7 @@ const AllStudents = () => {
     });
 
     setFilteredStudents(filteredData);
-    setShowBackButton(filteredData.length === 0); // Show back button if no data matches
+    setShowBackButton(filteredData.length === 0);
   };
 
 
@@ -143,6 +143,7 @@ const AllStudents = () => {
       const myData = await axios.get('http://localhost:3000/api/students')
       console.log(myData.data);
       setStudent(myData.data)
+      setFilteredStudents(myData.data);
     }
     fetchData();
 

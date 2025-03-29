@@ -2,11 +2,12 @@ import React from 'react';
 import { Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
 import { Link, useLocation } from 'react-router-dom';
+import { SearchOutlined, UserAddOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 const items = [
-  { key: "1", label: <Link to="/add-student">Add Student</Link> },
-  { key: "2", label: <Link to="/">All Students</Link> },
-  { key: "3", label: <Link to="/attendance">Attendance</Link> }
+  { key: "1", label: <Link to="/add-student"><UserAddOutlined /> Add Student</Link> },
+  { key: "2", label: <Link to="/"><CaretDownOutlined /> All Students</Link> },
+  { key: "3", label: <Link to="/search"><SearchOutlined /> Search</Link> }
 ];
 
 const MyLayout = ({children}) => {
@@ -16,7 +17,7 @@ const MyLayout = ({children}) => {
   const getSelectedKeys = () => {
     if (location.pathname === "/add-student") return ["1"];
     if (location.pathname === "/") return ["2"];
-    if (location.pathname === "/attendance") return ["3"];
+    if (location.pathname === "/search") return ["3"];
     return [];
   };
   const {
