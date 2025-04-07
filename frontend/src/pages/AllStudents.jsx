@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import '../App.css'
 import MyCard from '../components/MyCard'
 import axios from 'axios'
@@ -8,12 +8,13 @@ import { EyeOutlined, EditOutlined, MinusCircleOutlined, UserOutlined, NumberOut
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import StudentContext from '../Context/StudentContext';
+
 const AllStudents = () => {
 
-  const [student, setStudent] = useState([])
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [showBackButton, setShowBackButton] = useState(false);
- 
+  const {students} = useContext(StudentContext);
 
 
   const deleting = (id) => {
@@ -127,27 +128,14 @@ const AllStudents = () => {
 
   const onChange = ( filters, sorter, extra) => {
     console.log('params', filters, sorter, extra);
-    const filteredData = student.filter(student => {
-      return (!filters.Class || filters.Class.length === 0 || filters.Class.includes(student.Class));
+    const filteredData = students.filter(student => {
+      return (!filters.Class || filters.Class.length === 0 || filters.Class.includes(students.Class));
     });
 
     setFilteredStudents(filteredData);
     setShowBackButton(filteredData.length === 0);
   };
 
-
-  useEffect(() => {
-
-    async function fetchData() {
-
-      const myData = await axios.get('http://localhost:3000/api/students')
-      console.log(myData.data);
-      setStudent(myData.data)
-      setFilteredStudents(myData.data);
-    }
-    fetchData();
-
-  }, [])
 
   const backmove = () => {
     window.location.reload();
@@ -156,7 +144,7 @@ const AllStudents = () => {
   return (
     <MyLayout>
       <div className="" style={{ position: 'relative' }}>
-        {student.length === 0 ?
+        {students.length === 0 ?
           <div className="cont">
             <div className="spinner" >
 
@@ -175,7 +163,7 @@ const AllStudents = () => {
 
             <Table
               columns={columns}
-              dataSource={student}
+              dataSource={students}
               onChange={onChange}
               showSorterTooltip={{ target: 'sorter-icon' }}
               // pagination={false}

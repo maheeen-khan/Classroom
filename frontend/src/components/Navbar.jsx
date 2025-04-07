@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
 import { Link, useLocation } from 'react-router-dom';
 import { SearchOutlined, UserAddOutlined, CaretDownOutlined } from '@ant-design/icons';
+import StudentContext from '../Context/StudentContext';
 
-const items = [
-  { key: "1", label: <Link to="/add-student"><UserAddOutlined /> Add Student</Link> },
-  { key: "2", label: <Link to="/"><CaretDownOutlined /> All Students</Link> },
-  { key: "3", label: <Link to="/search"><SearchOutlined /> Search</Link> }
-];
 
 const MyLayout = ({children}) => {
   const location = useLocation(); // Get the current path
+  const { totalStudents} = useContext(StudentContext);
+
+  const items = [
+    { key: "1", label: <Link to="/add-student"><UserAddOutlined /> Add Student</Link> },
+    { key: "2", label: <Link to="/"><CaretDownOutlined /> All Students</Link> },
+    { key: "3", label: <Link to="/search"><SearchOutlined /> Search</Link> },
+    {key: '4', label: "Total Students : "+ totalStudents},
+  ];
 
   // Map pathname to Menu keys
   const getSelectedKeys = () => {

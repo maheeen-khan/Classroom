@@ -78,7 +78,7 @@ const Attendance = () => {
             <ViewCard name={student.name} Class={student.Class} rollNo={student.rollNo} email={student.email} Address={student.Address} createdAt={student.createdAt} updatedAt={student.updatedAt} />
           ))
         ) : (
-          <p style={{ color: 'grey', textAlign: 'center', marginTop: 70 }}>No student found 
+          <p style={{ color: 'grey', textAlign: 'center', marginTop: 70 }}>No data display 
          
           </p>
         )}
