@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Button,
   DatePicker,
@@ -7,9 +7,10 @@ import {
   InputNumber,
 } from 'antd';
 import axios from 'axios'
-import { toast , ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import StudentContext from '../context/StudentContext';
 
 const { RangePicker } = DatePicker;
 const formItemLayout = {
@@ -28,7 +29,7 @@ const BasicForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const { totalStudents , incrementStudentCount } = useContext(StudentContext)
   const onFinish = async (values) => {
 
     setLoading(true);
@@ -42,14 +43,15 @@ const BasicForm = () => {
         },
         body: JSON.stringify(values),
       });
-      
+
       const data = await uploadData.json();
 
       setTimeout(() => {
         setLoading(false);
         form.resetFields();
         toast.success("Student added successfully!");
-        
+        incrementStudentCount(); // Increment the count in context
+
         Swal.fire({
           title: "Do you want to add more students?",
           showDenyButton: true,
@@ -80,70 +82,70 @@ const BasicForm = () => {
   return (
     <>
 
-  <div className="cent">
-      <Form
-        {...formItemLayout}
-        form={form}
-        variant={'filled'}
-        style={{ maxWidth: 600 }}
-        initialValues={{ variant: 'filled' }}
-        onFinish={onFinish}
-      >
-
-        <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input name!' }]}>
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Class"
-          name="Class"
-          rules={[
-            { required: true, message: 'Please input class' },
-            { type: "number", min: 6, max: 10, message: "Class must be number & between 6 and 10" },
-          ]}
+      <div className="cent">
+        <Form
+          {...formItemLayout}
+          form={form}
+          variant={'filled'}
+          style={{ margin: '0 auto' }}
+          initialValues={{ variant: 'filled' }}
+          onFinish={onFinish}
         >
-          <InputNumber style={{ width: '100%' }} />
-        </Form.Item>
 
-        <Form.Item
-          label="Roll no"
-          name="rollNo"
-          rules={[
-            { required: true, message: 'Please input roll no' },
-            { type: "number", min: 1, max: 30, message: "Roll no must be number & between 1 and 30" },
-          ]}
-        >
-          <InputNumber style={{ width: '100%' }} />
-        </Form.Item>
+          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input name!' }]}>
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            { required: true, message: 'Please input email' },
-            { 
-              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, 
-              message: "Please enter a valid email address!" 
-            }
-          ]}
-        >
-          <Input style={{ width: '100%' }} />
-        </Form.Item>
+          <Form.Item
+            label="Class"
+            name="Class"
+            rules={[
+              { required: true, message: 'Please input class' },
+              { type: "number", min: 6, max: 10, message: "Class must be number & between 6 and 10" },
+            ]}
+          >
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
 
-        <Form.Item
-          label="Address"
-          name="Address"
-          rules={[{ required: true, message: 'Please input Address' }]}
-        >
-          <Input style={{ width: '100%' }} />
-        </Form.Item>
+          <Form.Item
+            label="Roll no"
+            name="rollNo"
+            rules={[
+              { required: true, message: 'Please input roll no' },
+              { type: "number", min: 1, max: 30, message: "Roll no must be number & between 1 and 30" },
+            ]}
+          >
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            {loading ? 'Adding...' : 'Add Student'}
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Please input email' },
+              {
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                message: "Please enter a valid email address!"
+              }
+            ]}
+          >
+            <Input style={{ width: '100%' }} />
+          </Form.Item>
+
+          <Form.Item
+            label="Address"
+            name="Address"
+            rules={[{ required: true, message: 'Please input Address' }]}
+          >
+            <Input style={{ width: '100%' }} />
+          </Form.Item>
+
+          <Form.Item >
+            <Button type="primary" htmlType="submit" className='add-btn'>
+              {loading ? 'Adding...' : 'Add Student'}
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
     </>
   );

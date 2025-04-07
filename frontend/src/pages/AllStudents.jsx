@@ -8,14 +8,12 @@ import { EyeOutlined, EditOutlined, MinusCircleOutlined, UserOutlined, NumberOut
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
-import StudentContext from '../Context/StudentContext';
 
 const AllStudents = () => {
 
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [showBackButton, setShowBackButton] = useState(false);
-  const {students} = useContext(StudentContext);
-
+  const [student, setStudent] = useState([])
 
   const deleting = (id) => {
 
@@ -128,13 +126,26 @@ const AllStudents = () => {
 
   const onChange = ( filters, sorter, extra) => {
     console.log('params', filters, sorter, extra);
-    const filteredData = students.filter(student => {
-      return (!filters.Class || filters.Class.length === 0 || filters.Class.includes(students.Class));
+    const filteredData = student.filter(student => {
+      return (!filters.Class || filters.Class.length === 0 || filters.Class.includes(student.Class));
     });
 
     setFilteredStudents(filteredData);
     setShowBackButton(filteredData.length === 0);
   };
+
+  useEffect(() => {
+ 
+    async function fetchData() {
+
+      const myData = await axios.get('http://localhost:3000/api/students')
+      console.log(myData.data);
+      setStudent(myData.data)
+      setFilteredStudents(myData.data);
+    }
+    fetchData();
+
+  }, [])
 
 
   const backmove = () => {
@@ -144,7 +155,7 @@ const AllStudents = () => {
   return (
     <MyLayout>
       <div className="" style={{ position: 'relative' }}>
-        {students.length === 0 ?
+        {student.length === 0 ?
           <div className="cont">
             <div className="spinner" >
 
@@ -161,9 +172,10 @@ const AllStudents = () => {
             </div></div>
           : <>
 
+
             <Table
               columns={columns}
-              dataSource={students}
+              dataSource={student}
               onChange={onChange}
               showSorterTooltip={{ target: 'sorter-icon' }}
               // pagination={false}
@@ -172,6 +184,7 @@ const AllStudents = () => {
                 showSizeChanger: false, // Hide page size changer
                 position: ['bottomCenter'], // Positions pagination at the bottom center
               }}
+              scroll={{ x: "max-content" }}
             />
 
             {showBackButton && (

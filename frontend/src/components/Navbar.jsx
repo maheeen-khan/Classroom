@@ -54,8 +54,8 @@ const MyLayout = ({children}) => {
       </Header>
       <Content
         style={{
-          padding: '0 48px',
-          marginTop: '64px',
+          padding: '0 18px',
+          marginTop: '27px',
         }}
       >
      

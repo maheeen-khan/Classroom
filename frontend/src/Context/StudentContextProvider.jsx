@@ -4,13 +4,14 @@ import StudentContext from "./StudentContext";
 
 const StudentContextProvider = ({ children }) => {
   
-  const [students, setStudents] = useState([]);
 
+  const [totalStudents, setTotalStudents] = useState(0);
+  
   useEffect(() => {
     const fetchStudents = async () => {
       try {
         const res = await axios.get("http://localhost:3000/api/students");
-        setStudents(res.data);
+        setTotalStudents(res.data.length);
         
       } catch (error) {
         console.error("Error fetching students:", error);
@@ -21,10 +22,14 @@ const StudentContextProvider = ({ children }) => {
     fetchStudents();
   }, []); // ✅ Called only once when Provider mounts
 
-  const totalStudents = students.length;
+
+  // Function to increase count by 1 after adding
+  const incrementStudentCount = () => {
+    setTotalStudents(prev => prev + 1);
+  };
 
   return (
-    <StudentContext.Provider value={{ students, totalStudents}}>
+    <StudentContext.Provider value={{totalStudents, incrementStudentCount}}>
       {children}
     </StudentContext.Provider>
   );
