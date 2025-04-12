@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme, Button } from 'antd';
 const { Header, Content, Footer } = Layout;
 import { Link, useLocation } from 'react-router-dom';
-import { SearchOutlined, UserAddOutlined, CaretDownOutlined } from '@ant-design/icons';
+import { SearchOutlined, UserAddOutlined, CaretDownOutlined, LogoutOutlined } from '@ant-design/icons';
 import StudentContext from '../Context/StudentContext';
 
 
@@ -15,6 +15,7 @@ const MyLayout = ({children}) => {
     { key: "2", label: <Link to="/"><CaretDownOutlined /> All Students</Link> },
     { key: "3", label: <Link to="/search"><SearchOutlined /> Search</Link> },
     {key: '4', label: "Total Students : "+ totalStudents},
+    {key: '5', label: <Button type="primary" icon={<LogoutOutlined />}> Logout</Button>},
   ];
 
   // Map pathname to Menu keys

@@ -13,8 +13,8 @@ const AppRoute = () => {
   return (
 
       <Routes>
-        <Route path="/register" element={<Navbar><RegistrationForm/></Navbar>}/>
-        <Route path="/login" element={<Navbar><LoginForm/></Navbar>}/>
+        <Route path="/register" element={<RegistrationForm/>}/>
+        <Route path="/login" element={<LoginForm/>}/>
         <Route path="/" element={<AllStudents />} />
         <Route path="/add-student" element={<Navbar><AddStudent /></Navbar>} />
         <Route path="/search" element={<Navbar><Search /></Navbar>} />

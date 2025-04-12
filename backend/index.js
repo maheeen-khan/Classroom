@@ -4,6 +4,9 @@ import cors from 'cors'
 import connectToDB from './db/dbStudent.mjs'
 import Student from './models/student.model.mjs'
 import User from './models/user.model.mjs'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import {signupValidation,loginValidation} from './middleware/UserAuth.mjs'
 
 connectToDB()
 
@@ -15,21 +18,21 @@ app.use(express.json());
 
 
 
-app.get('/api/students', async (req, res) => {
-    try{
+app.get('/api/students',  async (req, res) => {
+    try {
         const students = await Student.find()
         res.send(students)
     } catch (error) {
-        res.status(400).send({error: error, status: 400 })
+        res.status(400).send({ error: error, status: 400 })
     }
 })
 
 app.get('/api/students/:id', async (req, res) => {
-    try{
+    try {
         const student = await Student.findById(req.params.id)
         res.send(student)
-    }catch (error) {
-        res.status(400).send({error: error, status: 400 })
+    } catch (error) {
+        res.status(400).send({ error: error, status: 400 })
     }
 })
 
@@ -43,7 +46,7 @@ app.get('/api/students/name/:name', async (req, res) => {
         }
 
         res.status(200).json(students);
-        
+
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error });
     }
@@ -58,7 +61,7 @@ app.post('/api/addStudent', async (req, res) => {
 
 app.patch('/api/updateStudent/:id', async (req, res) => {
     const updateData = await req.body
-    const updateStudent = await Student.findByIdAndUpdate(req.params.id, updateData, {new: true})
+    const updateStudent = await Student.findByIdAndUpdate(req.params.id, updateData, { new: true })
     res.send(updateStudent)
     console.log("Student updated ", updateStudent)
 })
@@ -69,28 +72,64 @@ app.delete('/api/deleteStudent/:id', async (req, res) => {
     console.log("Student deleted ", student)
 })
 
-app.post('/register', async (req, res) => {
-    const userData = req.body
-    const newUser = await User.create(userData)
-    res.send(newUser)
-    console.log("User registered ", newUser)
+app.post('/register', signupValidation, async (req, res) => {
+
+    try {
+
+        const userData = req.body
+
+        const ifExist = await User.findOne({ username: userData.username })
+
+        if (ifExist) {
+            return res.status(400).send({ message: "User already exists" })
+        }
+    
+
+        const newUser = await User.create(userData)
+        if (!newUser) {
+            return res.status(400).send({ message: "User not registered" })
+        }
+        newUser.password = await bcrypt.hash(newUser.password, 10)
+
+        await newUser.save()
+        res.send(newUser)
+
+        console.log("User registered ", newUser)
+
+    } catch (error) {
+        res.status(400).send({ error: error, status: 400 })
+    }
 })
 
-app.post('/login', async (req, res) => {
+
+app.post('/login', loginValidation, async (req, res) => {
     const loginUserData = req.body
-    const loginUser = await User.findOne({ username: loginUserData.username, password: loginUserData.password })
+    const loginUser = await User.findOne({ username: loginUserData.username })
+
     if (!loginUser) {
         return res.status(401).send({ message: "Invalid username or password" })
     }
-    if (loginUser) {
-        res.send(loginUser)
-        console.log("User logged in ", loginUser)
-    } else {
-        res.status(401).send({ message: "Invalid username or password" })
-    } 
+
+    const isPasswordValid = await bcrypt.compare(loginUserData.password, loginUser.password)
+
+    if (!isPasswordValid) {
+        return res.status(401).send({ message: "Invalid password" })
+    }
+
+    const jwtToken = jwt.sign(
+        { id: loginUser._id },
+        process.env.JWT_TOKEN,
+        { expiresIn: '1h' }
+    )
+
+    
+    // res.send(loginUser)
+    console.log("User logged in ", loginUser)
+    res.status(200).json( {jwtToken , loginUser})
+    
 })
 
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
-    })
+})
