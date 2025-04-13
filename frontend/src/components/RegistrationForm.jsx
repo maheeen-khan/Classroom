@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import '../ComponentsStyleSheet/login-signup.css'
+
 const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
 };
@@ -18,11 +21,11 @@ const registrationForm = () => {
         try {
             const newUser = await axios.post('http://localhost:3000/register', values)
             console.log(newUser.data)
-           toast.success("User registered successfully")
+            toast.success("User registered successfully")
             setTimeout(() => {
                 setLoading(false)
                 navigate('/login')
-                
+
             }, 2000);
         } catch (error) {
             console.log(error)
@@ -33,38 +36,34 @@ const registrationForm = () => {
 
     return (
         <>
-        <h1 className='classroom-head'>Classroom</h1>
-            <h1 style={{ textAlign: 'center', marginTop:'100px',fontFamily: 'Georgia', fontSize:'38px', marginBottom:'45px', color:'#161179' }}>Sign Up</h1>
+            <h1 className='classroom-head'>Classroom</h1>
+            <h1 style={{ textAlign: 'center', marginTop: '100px', fontFamily: 'Georgia', fontSize: '38px', marginBottom: '45px', color: '#161179' }}>Sign up <span style={{color:'hsl(210, 72%, 50%)'}}>your Account</span></h1>
             <Form
                 name="basic"
-                labelCol={{ span: 5 }}
-                wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600, margin: '0 auto', marginTop: 30 }}
-                initialValues={{ remember: true }}
+                style={{ maxWidth: 400, margin: '0 auto', marginTop: 30 }}
+                initialValues={{ remember: false }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Username"
                     name="username"
                     rules={[
                         { required: true, message: 'Please input username' },
                         { type: "string", min: 3, max: 15, message: "Username must be string & of its length should be 3 to 15" },
-                      ]}
+                    ]}
                 >
-                    <Input />
+                    <Input prefix={<UserOutlined />} placeholder="Email" />
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
                     name="password"
                     rules={[
                         { required: true, message: 'Please input password' },
-                        { type: "string", min:6, max: 15, message: "Password length must be 6 to 15" },
-                      ]}
+                        { type: "string", min: 6, max: 15, message: "Password length must be 6 to 15" },
+                    ]}
                 >
-                    <Input.Password />
+                    <Input.Password prefix={<LockOutlined />} type="password" placeholder="Password" />
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked" label={null}>
@@ -73,12 +72,24 @@ const registrationForm = () => {
 
                 <Form.Item label={null}>
                     <div style={{ textAlign: 'center' }}>
-                    
-                    <Button type="primary" htmlType="submit">
-                        {loading ? "Signing..." : "Sign Up"}
-                    </Button>
-                    <br />
-                    <p style={{ marginTop: '20px' }}>Already have an account? <a href="/login">Login</a></p>
+
+                        {/* <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+                            {loading ? "Signing..." : "Sign Up"}
+                        </Button> */}
+                        <button alt={loading ? "Signing..." : "Sign Up"} className='user-btn' htmlType="submit">
+                            
+                            <i>S</i>
+                            <i>i</i>
+                            <i>g</i>
+                            <i>n</i>
+                            <i>&nbsp;</i>
+                            <i>u</i>
+                            <i>p</i>
+                            
+                        </button>
+
+                        <br />
+                        <p style={{ marginTop: '20px' }}>Already have an account? <a href="/login">Login</a></p>
                     </div>
 
                 </Form.Item>
