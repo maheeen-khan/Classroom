@@ -24,7 +24,7 @@ const registrationForm = () => {
             toast.success("User registered successfully")
             setTimeout(() => {
                 setLoading(false)
-                navigate('/login')
+                navigate('/')
 
             }, 2000);
         } catch (error) {

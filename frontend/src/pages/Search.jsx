@@ -22,6 +22,8 @@ const Attendance = () => {
   const [searchInput, setSearchInput] = useState(''); // State to control input field
   const [searchLoading, setSearchLoading] = useState(false)
 
+  const token = localStorage.getItem('token'); // retrieve token after login
+
   const onSearch = (value, _e, info) => {
     setSearchLoading(true)
     console.log(info === null || info === void 0 ? void 0 : info.source, value);
@@ -36,7 +38,13 @@ const Attendance = () => {
 
   const getStd = async (name) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/students/name/${name}`);
+      const response = await axios.get(`http://localhost:3000/api/students/name/${name}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}` // Include token in headers
+          }
+        }
+      );
 
       setSearch(response.data)
       setSearchLoading(false);

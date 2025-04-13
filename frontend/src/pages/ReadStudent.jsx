@@ -9,8 +9,14 @@ const ReadStudent = () => {
 
   const { id } = useParams();
   const getStudent = async () => {
+
+    const token = localStorage.getItem('token'); // retrieve token after login
     try {
-      const studentData = await axios.get(`http://localhost:3000/api/students/${id}`);
+      const studentData = await axios.get(`http://localhost:3000/api/students/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setstdData(studentData.data);
     } catch (error) {
       console.log("Error in getting student data!", error);

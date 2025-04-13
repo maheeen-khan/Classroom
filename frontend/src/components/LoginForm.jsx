@@ -24,7 +24,7 @@ const LoginForm = () => {
             toast.success("User logged in successfully")
             setTimeout(() => {
                 setLoading(false)
-                navigate('/')
+                navigate('/allStudents')
             }, 2000);
         } catch (error) {
             console.log(error)

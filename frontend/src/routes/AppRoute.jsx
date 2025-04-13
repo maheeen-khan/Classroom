@@ -14,8 +14,8 @@ const AppRoute = () => {
 
       <Routes>
         <Route path="/register" element={<RegistrationForm/>}/>
-        <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/" element={<AllStudents />} />
+        <Route path="/" element={<LoginForm/>}/>
+        <Route path="/allStudents" element={<AllStudents />} />
         <Route path="/add-student" element={<Navbar><AddStudent /></Navbar>} />
         <Route path="/search" element={<Navbar><Search /></Navbar>} />
         <Route path="/update/:id" element={<Navbar><UpdateStudent /></Navbar>} />

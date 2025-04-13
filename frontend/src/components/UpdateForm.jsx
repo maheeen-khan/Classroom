@@ -28,19 +28,25 @@ const BasicForm = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
-
+    
     const onFinish = async (values) => {
-
+        const token = localStorage.getItem('token'); // retrieve token after login
         setLoading(true);
 
         const updateStudent = async (values) => {
             try {
-                const updateData = await axios.patch(`http://localhost:3000/api/updateStudent/${id}`, values);
+                const updateData = await axios.patch(`http://localhost:3000/api/updateStudent/${id}`, values,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
 
                 toast.success("Student has been updated");
                 setTimeout(() => {
                     setLoading(false);
-                    navigate('/');
+                    navigate('/allStudents');
                 }, 1000);
 
             } catch (err) {
@@ -52,8 +58,15 @@ const BasicForm = () => {
     };
 
     const getStudent = async () => {
+        const token = localStorage.getItem('token'); // retrieve token after login
         try {
-            const uploadData = await axios.get(`http://localhost:3000/api/students/${id}`);
+            const uploadData = await axios.get(`http://localhost:3000/api/students/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
             form.setFieldsValue(uploadData.data); // setting the form values
 

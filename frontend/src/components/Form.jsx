@@ -11,7 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import StudentContext from '../context/StudentContext';
-
+import '../ComponentsStyleSheet/login-signup.css'
 const { RangePicker } = DatePicker;
 const formItemLayout = {
   labelCol: {
@@ -29,7 +29,10 @@ const BasicForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { totalStudents , incrementStudentCount } = useContext(StudentContext)
+  const { totalStudents, incrementStudentCount } = useContext(StudentContext)
+
+  const token = localStorage.getItem('token'); // retrieve token after login
+
   const onFinish = async (values) => {
 
     setLoading(true);
@@ -40,6 +43,7 @@ const BasicForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // Include the token in the headers
         },
         body: JSON.stringify(values),
       });
@@ -64,7 +68,7 @@ const BasicForm = () => {
             navigate('/add-student')
           } else if (result.isDenied) {
             // Swal.fire("Changes are not saved", "", "info");
-            navigate('/')
+            navigate('/allStudents')
           }
         });
 
@@ -140,11 +144,33 @@ const BasicForm = () => {
             <Input style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item >
-            <Button type="primary" htmlType="submit" className='add-btn'>
-              {loading ? 'Adding...' : 'Add Student'}
-            </Button>
+          <Form.Item
+            label=" "
+            colon={false}
+            wrapperCol={{ xs: { span: 24 }, sm: { span: 14 } }}
+          >
+            <div style={{ textAlign: 'center' }}>
+              <button
+                alt={loading ? 'Adding...' : 'Add Student'}
+                className="user-btn"
+                htmlType="submit"
+              >
+                <i>A</i>
+                <i>d</i>
+                <i>d</i>
+                <i>&nbsp;</i>
+                <i>S</i>
+                <i>t</i>
+                <i>u</i>
+                <i>d</i>
+                <i>e</i>
+                <i>n</i>
+                <i>t</i>
+              </button>
+            </div>
           </Form.Item>
+
+
         </Form>
       </div>
     </>

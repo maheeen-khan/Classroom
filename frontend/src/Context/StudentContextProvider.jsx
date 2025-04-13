@@ -7,10 +7,19 @@ const StudentContextProvider = ({ children }) => {
 
   const [totalStudents, setTotalStudents] = useState(0);
   
+  const token = localStorage.getItem('token'); // retrieve token after login
+
+
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/students");
+        const res = await axios.get("http://localhost:3000/api/students",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setTotalStudents(res.data.length);
         
       } catch (error) {

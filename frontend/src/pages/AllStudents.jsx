@@ -23,7 +23,13 @@ const AllStudents = () => {
 
     
     const deleteStudent = async () => {
-      const res = await axios.delete(`http://localhost:3000/api/deleteStudent/${id}`);
+      const res = await axios.delete(`http://localhost:3000/api/deleteStudent/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log("Deleted Student : ", res.data);
       toast.error("Student Deleted Successfully!");
     }

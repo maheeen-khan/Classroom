@@ -12,7 +12,7 @@ const MyLayout = ({children}) => {
 
   const items = [
     { key: "1", label: <Link to="/add-student"><UserAddOutlined /> Add Student</Link> },
-    { key: "2", label: <Link to="/"><CaretDownOutlined /> All Students</Link> },
+    { key: "2", label: <Link to="/allStudents"><CaretDownOutlined /> All Students</Link> },
     { key: "3", label: <Link to="/search"><SearchOutlined /> Search</Link> },
     {key: '4', label: "Total Students : "+ totalStudents},
     {key: '5', label: <Button type="primary" icon={<LogoutOutlined />}> Logout</Button>},
@@ -21,7 +21,7 @@ const MyLayout = ({children}) => {
   // Map pathname to Menu keys
   const getSelectedKeys = () => {
     if (location.pathname === "/add-student") return ["1"];
-    if (location.pathname === "/") return ["2"];
+    if (location.pathname === "/allStudents") return ["2"];
     if (location.pathname === "/search") return ["3"];
     return [];
   };
