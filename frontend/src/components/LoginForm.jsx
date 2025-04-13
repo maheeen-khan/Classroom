@@ -20,6 +20,7 @@ const LoginForm = () => {
         try {
             const newUser = await axios.post('http://localhost:3000/login', values)
             console.log(newUser.data)
+            localStorage.setItem('token', newUser.data.jwtToken); // store after login
             toast.success("User logged in successfully")
             setTimeout(() => {
                 setLoading(false)
@@ -48,7 +49,7 @@ const LoginForm = () => {
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                    <Input prefix={<UserOutlined />} placeholder="Email" />
+                    <Input prefix={<UserOutlined />} placeholder="Username" />
                 </Form.Item>
 
                 <Form.Item

@@ -53,7 +53,7 @@ const registrationForm = () => {
                         { type: "string", min: 3, max: 15, message: "Username must be string & of its length should be 3 to 15" },
                     ]}
                 >
-                    <Input prefix={<UserOutlined />} placeholder="Email" />
+                    <Input prefix={<UserOutlined />} placeholder="Username" />
                 </Form.Item>
 
                 <Form.Item

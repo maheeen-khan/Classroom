@@ -7,6 +7,7 @@ import User from './models/user.model.mjs'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import {signupValidation,loginValidation} from './middleware/UserAuth.mjs'
+import ensureAuthorized from './middleware/tokenVerification.mjs'
 
 connectToDB()
 
@@ -18,7 +19,7 @@ app.use(express.json());
 
 
 
-app.get('/api/students',  async (req, res) => {
+app.get('/api/students', ensureAuthorized, async (req, res) => {
     try {
         const students = await Student.find()
         res.send(students)
@@ -27,7 +28,7 @@ app.get('/api/students',  async (req, res) => {
     }
 })
 
-app.get('/api/students/:id', async (req, res) => {
+app.get('/api/students/:id', ensureAuthorized, async (req, res) => {
     try {
         const student = await Student.findById(req.params.id)
         res.send(student)
@@ -37,7 +38,7 @@ app.get('/api/students/:id', async (req, res) => {
 })
 
 // Find student by name 
-app.get('/api/students/name/:name', async (req, res) => {
+app.get('/api/students/name/:name', ensureAuthorized, async (req, res) => {
     try {
         const students = await Student.find({ name: { $regex: new RegExp(req.params.name, 'i') } }).lean();
 
@@ -52,21 +53,21 @@ app.get('/api/students/name/:name', async (req, res) => {
     }
 });
 
-app.post('/api/addStudent', async (req, res) => {
+app.post('/api/addStudent', ensureAuthorized, async (req, res) => {
     const data = await req.body
     const student = await Student.create(data)
     res.send(student)
     console.log(student)
 })
 
-app.patch('/api/updateStudent/:id', async (req, res) => {
+app.patch('/api/updateStudent/:id', ensureAuthorized, async (req, res) => {
     const updateData = await req.body
     const updateStudent = await Student.findByIdAndUpdate(req.params.id, updateData, { new: true })
     res.send(updateStudent)
     console.log("Student updated ", updateStudent)
 })
 
-app.delete('/api/deleteStudent/:id', async (req, res) => {
+app.delete('/api/deleteStudent/:id', ensureAuthorized, async (req, res) => {
     const student = await Student.findByIdAndDelete(req.params.id)
     res.send(student)
     console.log("Student deleted ", student)

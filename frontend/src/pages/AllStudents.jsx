@@ -15,6 +15,10 @@ const AllStudents = () => {
   const [showBackButton, setShowBackButton] = useState(false);
   const [student, setStudent] = useState([])
 
+
+  const token = localStorage.getItem('token'); // retrieve token after login
+
+
   const deleting = (id) => {
 
     
@@ -138,7 +142,13 @@ const AllStudents = () => {
  
     async function fetchData() {
 
-      const myData = await axios.get('http://localhost:3000/api/students')
+      const myData = await axios.get('http://localhost:3000/api/students',{
+        
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+
+      });
       console.log(myData.data);
       setStudent(myData.data)
       setFilteredStudents(myData.data);
