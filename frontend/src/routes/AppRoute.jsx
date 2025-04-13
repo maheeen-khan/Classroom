@@ -28,7 +28,7 @@ const AppRoute = () => {
       <Route path="/search" element={isLoggedIn ? <Navbar><Search /></Navbar> : <Navigate to="/" />} />
       <Route path="/update/:id" element={isLoggedIn ? <Navbar><UpdateStudent /></Navbar> : <Navigate to="/" />} />
       <Route path="/view-student/:id" element={isLoggedIn ? <Navbar><ReadStudent /></Navbar> : <Navigate to="/" />} />
-      <Route path="*" element={isLoggedIn ? <Navbar><PageNotFound /></Navbar> : <Navigate to="/" />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

@@ -6,6 +6,7 @@ const PageNotFound = () => {
     const nav = useNavigate()
     return (
         <>
+         <h1 className='classroom-head'>Classroom</h1>
         <Result
         className='mt-3'
         status="404"
