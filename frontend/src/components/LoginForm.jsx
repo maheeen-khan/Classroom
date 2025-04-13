@@ -24,10 +24,13 @@ const LoginForm = () => {
             localStorage.setItem('token', newUser.data.jwtToken); // store after login
 
             toast.success("User logged in successfully")
+            
+
             setTimeout(() => {
                 setLoading(false)
-                navigate('/allStudents')
+                window.location.href = "/allStudents";
             }, 2000);
+
         } catch (error) {
             console.log(error)
             toast.error("User does not exist")

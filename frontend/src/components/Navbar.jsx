@@ -4,18 +4,41 @@ const { Header, Content, Footer } = Layout;
 import { Link, useLocation } from 'react-router-dom';
 import { SearchOutlined, UserAddOutlined, CaretDownOutlined, LogoutOutlined } from '@ant-design/icons';
 import StudentContext from '../Context/StudentContext';
-
-
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 const MyLayout = ({children}) => {
   const location = useLocation(); // Get the current path
   const { totalStudents} = useContext(StudentContext);
+  const navigate = useNavigate(); 
+  // Logout functionality
 
+  const logout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You will be logged out!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        Swal.fire('Logged out!', 'You have been successfully logged out.', 'success').then(() => {
+          navigate('/'); // Redirect to the login page
+          localStorage.removeItem('token');
+        });
+      }
+    });
+  };
+
+  
   const items = [
     { key: "1", label: <Link to="/add-student"><UserAddOutlined /> Add Student</Link> },
     { key: "2", label: <Link to="/allStudents"><CaretDownOutlined /> All Students</Link> },
     { key: "3", label: <Link to="/search"><SearchOutlined /> Search</Link> },
     {key: '4', label: "Total Students : "+ totalStudents},
-    {key: '5', label: <Button type="primary" icon={<LogoutOutlined />}> Logout</Button>},
+    {key: '5', label: <Button type="primary" icon={<LogoutOutlined />} onClick={logout}> Logout</Button>},
   ];
 
   // Map pathname to Menu keys
@@ -39,6 +62,9 @@ const MyLayout = ({children}) => {
       >
         <div className="demo-logo" />
         <h1 className='logo'>Classroom</h1>
+
+        <div style={{ marginLeft: 'auto' }}>
+
         <Menu
           theme="dark"
           mode="horizontal"
@@ -52,6 +78,8 @@ const MyLayout = ({children}) => {
             backgroundColor: '#161179',
           }}
         />
+
+        </div>
       </Header>
       <Content
         style={{

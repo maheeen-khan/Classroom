@@ -8,7 +8,7 @@ const ViewCard = (props) => {
 
       <Card title={props.name} variant="borderless" style={{ backgroundColor: '#eaf2c3'}} headStyle={{ color: '#161179', borderBottom: '1px solid rgb(165, 165, 165)', textAlign: 'center', fontSize:'22px', fontFamily:"Georgia" }}>
 
-      <p className='update'>{props.updatedAt == props.createdAt ? "" : <Tag color="geekblue">
+      <p className='update' style={{textAlign:'center'}}>{props.updatedAt == props.createdAt ? "" : <Tag color="geekblue">
         UPDATED
       </Tag>}</p>
 
