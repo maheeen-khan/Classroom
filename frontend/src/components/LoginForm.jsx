@@ -20,7 +20,9 @@ const LoginForm = () => {
         try {
             const newUser = await axios.post('http://localhost:3000/login', values)
             console.log(newUser.data)
+
             localStorage.setItem('token', newUser.data.jwtToken); // store after login
+
             toast.success("User logged in successfully")
             setTimeout(() => {
                 setLoading(false)

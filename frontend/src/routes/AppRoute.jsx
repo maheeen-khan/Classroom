@@ -8,19 +8,27 @@ import Navbar from '../components/Navbar.jsx'
 import ReadStudent from '../pages/ReadStudent.jsx'
 import RegistrationForm from '../components/registrationForm.jsx'
 import LoginForm from '../components/LoginForm.jsx'
+// import PageNotFound from '../pages/PageNotFound.jsx'
 
 const AppRoute = () => {
+  // Check if the user is logged in by checking the token in localStorage
+  const token = localStorage.getItem('token')
+  const isLoggedIn = token !== "undefined" && token !== null && token !== "" && token !== "null";
+
   return (
 
       <Routes>
-        <Route path="/register" element={<RegistrationForm/>}/>
-        <Route path="/" element={<LoginForm/>}/>
-        <Route path="/allStudents" element={<AllStudents />} />
-        <Route path="/add-student" element={<Navbar><AddStudent /></Navbar>} />
-        <Route path="/search" element={<Navbar><Search /></Navbar>} />
-        <Route path="/update/:id" element={<Navbar><UpdateStudent /></Navbar>} />
-        <Route path="/view-student/:id" element={<Navbar><ReadStudent/></Navbar>}></Route>
+        <Route path="/register" element={isLoggedIn ? <AllStudents /> : <RegistrationForm/>}/>
+        <Route path="/" element={isLoggedIn ? <AllStudents /> : <LoginForm/>}/>
+        <Route path="/allStudents" element={isLoggedIn ? <AllStudents /> : <LoginForm/> } />
+        <Route path="/add-student" element={isLoggedIn ? <Navbar><AddStudent /></Navbar> : <LoginForm/>} />
+        <Route path="/search" element={isLoggedIn ? <Navbar><Search /></Navbar> : <LoginForm/>} />
+        <Route path="/update/:id" element={isLoggedIn ? <Navbar><UpdateStudent /></Navbar> : <LoginForm/>} />
+        <Route path="/view-student/:id" element={isLoggedIn ? <Navbar><ReadStudent/></Navbar> : <LoginForm/>}></Route>
         <Route path="/delete"></Route>
+
+        {/* <Route path='*' element={<Navbar> <PageNotFound/> </Navbar>}></Route> */}
+
       </Routes>
 
 
