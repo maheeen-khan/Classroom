@@ -38,8 +38,10 @@ const BasicForm = () => {
     setLoading(true);
     console.log("Submitted Values:", values);
 
+    const backendHostedURL = "https://classroom-production-fd75.up.railway.app"
+
     try {
-      const uploadData = await fetch("http://localhost:3000/api/addStudent", {
+      const uploadData = await fetch(`${backendHostedURL}/api/addStudent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

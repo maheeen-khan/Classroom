@@ -35,7 +35,7 @@ const BasicForm = () => {
 
         const updateStudent = async (values) => {
             try {
-                const updateData = await axios.patch(`http://localhost:3000/api/updateStudent/${id}`, values,
+                const updateData = await axios.patch(`https://classroom-production-fd75.up.railway.app/api/updateStudent/${id}`, values,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ const BasicForm = () => {
     const getStudent = async () => {
         const token = localStorage.getItem('token'); // retrieve token after login
         try {
-            const uploadData = await axios.get(`http://localhost:3000/api/students/${id}`,
+            const uploadData = await axios.get(`https://classroom-production-fd75.up.railway.app/api/students/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

@@ -17,13 +17,13 @@ const AllStudents = () => {
 
 
   const token = localStorage.getItem('token'); // retrieve token after login
-
+  const backendHostedURL = "https://classroom-production-fd75.up.railway.app"
 
   const deleting = (id) => {
 
     
     const deleteStudent = async () => {
-      const res = await axios.delete(`http://localhost:3000/api/deleteStudent/${id}`,
+      const res = await axios.delete(`${backendHostedURL}/api/deleteStudent/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -148,7 +148,7 @@ const AllStudents = () => {
  
     async function fetchData() {
 
-      const myData = await axios.get('http://localhost:3000/api/students',{
+      const myData = await axios.get(`${backendHostedURL}/api/students`,{
         
         headers: {
           Authorization: `Bearer ${token}`,

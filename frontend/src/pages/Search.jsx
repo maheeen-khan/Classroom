@@ -38,7 +38,7 @@ const Attendance = () => {
 
   const getStd = async (name) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/students/name/${name}`,
+      const response = await axios.get(`https://classroom-production-fd75.up.railway.app/api/students/name/${name}`,
         {
           headers: {
             'Authorization': `Bearer ${token}` // Include token in headers

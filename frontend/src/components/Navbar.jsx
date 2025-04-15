@@ -63,7 +63,7 @@ const MyLayout = ({children}) => {
         <div className="demo-logo" />
         <h1 className='logo'>Classroom</h1>
 
-        <div style={{ marginLeft: 'auto' }}>
+        {/* <div style={{ marginLeft: 'auto' }}> */}
 
         <Menu
           theme="dark"
@@ -79,7 +79,7 @@ const MyLayout = ({children}) => {
           }}
         />
 
-        </div>
+        {/* </div> */}
       </Header>
       <Content
         style={{

@@ -18,7 +18,7 @@ const LoginForm = () => {
         setLoading(true)
         // console.log('Success:', values);
         try {
-            const newUser = await axios.post('http://localhost:3000/login', values)
+            const newUser = await axios.post('https://classroom-production-fd75.up.railway.app/login', values)
             console.log(newUser.data)
 
             localStorage.setItem('token', newUser.data.jwtToken); // store after login

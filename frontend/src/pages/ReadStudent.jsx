@@ -12,7 +12,7 @@ const ReadStudent = () => {
 
     const token = localStorage.getItem('token'); // retrieve token after login
     try {
-      const studentData = await axios.get(`http://localhost:3000/api/students/${id}`, {
+      const studentData = await axios.get(`https://classroom-production-fd75.up.railway.app/api/students/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

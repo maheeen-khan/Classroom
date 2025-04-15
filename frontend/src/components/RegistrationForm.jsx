@@ -19,7 +19,7 @@ const registrationForm = () => {
         setLoading(true)
         // console.log('Success:', values);
         try {
-            const newUser = await axios.post('http://localhost:3000/register', values)
+            const newUser = await axios.post('https://classroom-production-fd75.up.railway.app/register', values)
             console.log(newUser.data)
             toast.success("User registered successfully")
             setTimeout(() => {

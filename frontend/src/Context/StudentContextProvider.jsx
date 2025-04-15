@@ -13,7 +13,7 @@ const StudentContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/students",
+        const res = await axios.get("https://classroom-production-fd75.up.railway.app/api/students",
           {
             headers: {
               Authorization: `Bearer ${token}`,
