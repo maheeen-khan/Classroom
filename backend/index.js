@@ -14,9 +14,11 @@ connectToDB()
 const app = express()
 const port = process.env.PORT || 4000
 
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: 'https://cool-syrniki-06aeda.netlify.app'
+}));
 
+app.use(express.json());
 
 
 app.get('/api/students', ensureAuthorized, async (req, res) => {
