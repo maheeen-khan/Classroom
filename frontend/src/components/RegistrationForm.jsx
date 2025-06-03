@@ -89,7 +89,7 @@ const registrationForm = () => {
                         </button>
 
                         <br />
-                        <p style={{ marginTop: '20px' }}>Already have an account? <a href="/login">Login</a></p>
+                        <p style={{ marginTop: '20px' }}>Already have an account? <a href="/">Login</a></p>
                     </div>
 
                 </Form.Item>
