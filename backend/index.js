@@ -1,22 +1,20 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
-import connectToDB from '../db/dbStudent.mjs'
-import Student from '../models/student.model.mjs'
-import User from '../models/user.model.mjs'
+import connectToDB from './db/dbStudent.mjs'
+import Student from './models/student.model.mjs'
+import User from './models/user.model.mjs'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import {signupValidation,loginValidation} from '../middleware/UserAuth.mjs'
-import ensureAuthorized from '../middleware/tokenVerification.mjs'
+import {signupValidation,loginValidation} from './middleware/UserAuth.mjs'
+import ensureAuthorized from './middleware/tokenVerification.mjs'
 
 connectToDB()
 
 const app = express()
 const port = process.env.PORT || 4000
 
-app.use(cors({
-  origin: 'https://cool-syrniki-06aeda.netlify.app'
-}));
+app.use(cors());
 
 app.use(express.json());
 
